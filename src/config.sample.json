@@ -1,0 +1,5 @@
+{
+  "accuweatherLocationsApi": "http://dataservice.accuweather.com/locations/v1/",
+  "accuweatherForecastsApi": "http://dataservice.accuweather.com/forecasts/v1/",
+  "accuweatherApiKey": "add_api_key_here"
+}
