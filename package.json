@@ -1,0 +1,26 @@
+{
+  "name": "poke-weather-api",
+  "version": "0.1.0",
+  "description": "Backend web services for PokeWeather.",
+  "main": "dist/app.js",
+  "scripts": {
+    "build": "babel src -d dist"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jakawell/poke-weather-api.git"
+  },
+  "author": "Jesse Kawell",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jakawell/poke-weather-api/issues"
+  },
+  "homepage": "https://github.com/jakawell/poke-weather-api#readme",
+  "dependencies": {
+    "express": "^4.16.2"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-preset-env": "^1.6.1"
+  }
+}
