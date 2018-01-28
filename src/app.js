@@ -24,12 +24,18 @@ function requestWeather(language, isMetric, location, res) {
       metric: isMetric
     }
   }, (error, response, body) => {
-    if (error)
-      res.status(400).json({ errorCode: 'BAD_FORECAST', errorDesc: 'Failed to find a forecast.'})
-    res.json({
-      location: location,
-      forecast: JSON.parse(body)
-    });
+    if (error) {
+      res.status(400).json({ errorCode: 'BAD_FORECAST', errorDesc: 'Failed to find a forecast.'});
+    }
+    else if (response.statusCode < 200 || response.statusCode > 299) {
+      res.status(response.statusCode).json({ errorCode: 'ERROR_WEATHER', errorDesc: 'The AccuWeather weather service returned an error.', errorBody: JSON.parse(body)});
+    }
+    else {
+      res.json({
+        location: location,
+        forecast: JSON.parse(body)
+      });
+    }
   });
 }
 
@@ -52,7 +58,10 @@ app.get('/weather', (req, res) => {
       }
     }, (error, response, body) => {
       if (error) {
-        res.status(400).json(error);
+        res.status(400).json({ errorCode: 'FAILED_LOC', errorDesc: 'Failed to find a matching location.', errorBody: error});
+      }
+      else if (response.statusCode < 200 || response.statusCode > 299) {
+        res.status(response.statusCode).json({ errorCode: 'ERROR_LOC', errorDesc: 'The AccuWeather location service returned an error.', errorBody: JSON.parse(body)});
       }
       else {
         const locationResults = JSON.parse(body);
